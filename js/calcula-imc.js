@@ -32,9 +32,9 @@ for (let i = 0; i < pacientes.length; i++) {
   }
 
   if (alturaEhValida && pesoEhValido) {
-    var imc = peso / (altura * altura);
-    // mostrar só duas casas decimais
-    tdImc.textContent = imc.toFixed(2);
+    var imc = calculaImc(peso, altura);
+    
+    tdImc.textContent = imc;
   } else {
     tdImc.textContent = "Altura e/ou peso inválidos!";
     // mudar a cor da linha p/ verelho casa tenha dado inválido. Note que a variável paciente é a linha em si.(É o tr, ou classe inteira, selecionados.). O estilo foi adicionado chamando uma class do css e utilziando o js pra inserir esssa classe na variável paciente
@@ -42,4 +42,9 @@ for (let i = 0; i < pacientes.length; i++) {
   }
 }
 
-
+function calculaImc(peso,altura) {
+  var imc = 0;
+  imc = peso / (altura * altura);
+  // mostrar só duas casas decimais
+  return imc.toFixed(2);
+}
