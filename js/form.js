@@ -13,12 +13,23 @@ botaoAdicionar.addEventListener("click", function (event) {
 
   var pacienteTr = montaTr(paciente);
 
+  var erros = validaPaciente(paciente);
+
+  if(erros.length > 0){
+    exibeMensagemErro(erros);
+
+    return;
+  }
+
+  
   // Coloando o "tr" dentro do "tbody, ou seja, adicionando o pacienteTr dentro da tabela"
   var tabela = document.querySelector("#tabela-pacientes");
   tabela.appendChild(pacienteTr);
 
   // Limpa os campos do formulário após clicar no btn add
   formulario.reset();
+  var menssagensErro = document.querySelector(".mensagem-erro")
+  menssagensErro.innerHTML = "";
 });
 
 // cria o objeto paciente a partir de dados do formulário
@@ -68,3 +79,43 @@ function montaTd(dado, classe) {
 
   return td;
 }
+
+function validaPaciente(paciente){
+  var erros = [];
+
+  if(paciente.nome.length == 0){
+    erros.push("Favor informar o nome");
+  }
+
+  if(!validaPeso(paciente.peso)){
+    erros.push("O peso informado é inválido");
+  }
+
+  if(!validaAltura(paciente.altura)){
+    erros.push("A altura informada é inválida!");
+  }
+  if(paciente.gordura.length == 0){
+    erros.push("Favor informar a % de gordura");
+  }
+  if(paciente.peso.length == 0){
+    erros.push("Favor informar o peso");
+  }
+  if(paciente.altura.length == 0){
+    erros.push("Favor informar o peso")
+  }
+
+  return erros;
+}
+
+function exibeMensagemErro(erros){
+var ul = document.querySelector(".mensagem-erro");
+// limpa as msg de erro quando a função é chamada novamente
+ul.innerHTML = "";
+erros.forEach(function(erro){
+var li = document.createElement("li");
+li.textContent = erro;
+ul.appendChild(li);
+});
+}
+
+
