@@ -15,20 +15,19 @@ botaoAdicionar.addEventListener("click", function (event) {
 
   var erros = validaPaciente(paciente);
 
-  if(erros.length > 0){
+  if (erros.length > 0) {
     exibeMensagemErro(erros);
 
     return;
   }
 
-  
   // Coloando o "tr" dentro do "tbody, ou seja, adicionando o pacienteTr dentro da tabela"
   var tabela = document.querySelector("#tabela-pacientes");
   tabela.appendChild(pacienteTr);
 
   // Limpa os campos do formulário após clicar no btn add
   formulario.reset();
-  var menssagensErro = document.querySelector(".mensagem-erro")
+  var menssagensErro = document.querySelector(".mensagem-erro");
   menssagensErro.innerHTML = "";
 });
 
@@ -80,42 +79,40 @@ function montaTd(dado, classe) {
   return td;
 }
 
-function validaPaciente(paciente){
+function validaPaciente(paciente) {
   var erros = [];
 
-  if(paciente.nome.length == 0){
+  if (paciente.nome.length == 0) {
     erros.push("Favor informar o nome");
   }
 
-  if(!validaPeso(paciente.peso)){
+  if (!validaPeso(paciente.peso)) {
     erros.push("O peso informado é inválido");
   }
 
-  if(!validaAltura(paciente.altura)){
+  if (!validaAltura(paciente.altura)) {
     erros.push("A altura informada é inválida!");
   }
-  if(paciente.gordura.length == 0){
+  if (paciente.gordura.length == 0) {
     erros.push("Favor informar a % de gordura");
   }
-  if(paciente.peso.length == 0){
+  if (paciente.peso.length == 0) {
     erros.push("Favor informar o peso");
   }
-  if(paciente.altura.length == 0){
-    erros.push("Favor informar o peso")
+  if (paciente.altura.length == 0) {
+    erros.push("Favor informar a altura");
   }
 
   return erros;
 }
 
-function exibeMensagemErro(erros){
-var ul = document.querySelector(".mensagem-erro");
-// limpa as msg de erro quando a função é chamada novamente
-ul.innerHTML = "";
-erros.forEach(function(erro){
-var li = document.createElement("li");
-li.textContent = erro;
-ul.appendChild(li);
-});
+function exibeMensagemErro(erros) {
+  var ul = document.querySelector(".mensagem-erro");
+  // limpa as msg de erro quando a função é chamada novamente
+  ul.innerHTML = "";
+  erros.forEach(function (erro) {
+    var li = document.createElement("li");
+    li.textContent = erro;
+    ul.appendChild(li);
+  });
 }
-
-
